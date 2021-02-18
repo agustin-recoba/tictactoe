@@ -9,7 +9,7 @@ public class Main {
 }
 
 class Game {
-    char[][] positions;
+    char[][] positions; 
 
     Game () {
         positions = new char[][] { {'_', '_', '_'}, {'_', '_', '_'}, {'_', '_', '_'} };
