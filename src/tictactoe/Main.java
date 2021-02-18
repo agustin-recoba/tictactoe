@@ -9,64 +9,59 @@ public class Main {
 }
 
 class Game {
-    char[] positions;
+    char[][] positions;
 
-    // Constructors for new game and for resuming a previous one
     Game () {
-        positions = new char[] {'_', '_', '_', '_', '_', '_', '_', '_', '_'};
+        positions = new char[][] { {'_', '_', '_'}, {'_', '_', '_'}, {'_', '_', '_'} };
     }
 
     Game (String input) {
-        positions = new char[9];
-        for (int i = 0; i < input.length(); i++ ) {
-            positions[i] = input.charAt(i);
-        }
+        positions = new char[3][3];
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                positions[i][j] = input.charAt(i + j * 3);
     }
 
-    void draw(){
+    void draw() {
         System.out.println("---------");
-        for (int i = 0; i < positions.length; i++) {
-            if (i % 3 == 0) {
-                System.out.print("| ");
+        for (int j = 0; j < 3; j++) {
+            System.out.print("| ");
+            for (int i = 0; i < 3; i++){
+                System.out.print(this.positions[i][j] + " ");
             }
-
-            System.out.print(positions[i] + " ");
-
-            if ( i % 3 == 2){
-                System.out.print("|");
-                System.out.println();
-            }
+            System.out.print("|");
+            System.out.println();
         }
         System.out.println("---------");
     }
 
-
-    Boolean completedLine(char player){     // returns true if player is eligible for winning
+    Boolean completedLine(char player){
         return
-                this.positions[0] + this.positions[1] + this.positions[2] == player*3 || //rows
-                this.positions[3] + this.positions[4] + this.positions[5] == player*3 ||
-                this.positions[6] + this.positions[7] + this.positions[8] == player*3 ||
+                this.positions[0][0] + this.positions[1][0] + this.positions[2][0] == player*3 ||
+                        this.positions[0][1] + this.positions[1][1] + this.positions[2][1] == player*3 ||
+                        this.positions[0][2] + this.positions[1][2] + this.positions[2][2] == player*3 ||
 
-                this.positions[0] + this.positions[3] + this.positions[6] == player*3 || //columns
-                this.positions[1] + this.positions[4] + this.positions[7] == player*3 ||
-                this.positions[2] + this.positions[5] + this.positions[8] == player*3 ||
+                        this.positions[0][0] + this.positions[0][1] + this.positions[0][2] == player*3 ||
+                        this.positions[1][0] + this.positions[1][1] + this.positions[1][2] == player*3 ||
+                        this.positions[2][0] + this.positions[2][1] + this.positions[2][2] == player*3 ||
 
-                this.positions[0] + this.positions[4] + this.positions[8] == player*3 || //diagonals
-                this.positions[2] + this.positions[4] + this.positions[6] == player*3 ;
+                        this.positions[0][0] + this.positions[1][1] + this.positions[2][2] == player*3 ||
+                        this.positions[0][2] + this.positions[1][1] + this.positions[2][0] == player*3 ;
     }
 
-    int count(char player) {  // returns the amount of X or O in the table
+    int count(char player) {
         int count = 0;
-        for (int j = 0; j < this.positions.length; j++) {
-            count += this.positions[j] == player ? 1 : 0 ;
-        }
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                count += this.positions[i][j] == player ? 1 : 0;
         return count;
     }
 
-    int spacesLeft(){
+    int spacesLeft() {
         int count = 0;
-        for (int i = 0; i < positions.length; i++)
-            count += this.positions[i] == '_' ? 1 : 0;
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                count += this.positions[i][j] == '_' ? 1 : 0;
         return count;
     }
 
@@ -112,12 +107,12 @@ class Game {
             } else if (! (Integer.parseInt(inp1) > 0) || ! (Integer.parseInt(inp1) < 4) || !(Integer.parseInt(inp2) > 0) || ! (Integer.parseInt(inp2) < 4)) {
                 System.out.println("Coordinates should be from 1 to 3!");
                 continue;
-            } else if (this.positions[(Integer.parseInt(inp1)-1) * 3 + Integer.parseInt(inp2) - 1] != '_') {
+            } else if (this.positions[Integer.parseInt(inp2)-1][Integer.parseInt(inp1)-1] != '_') {
                 System.out.println("This cell is occupied! Choose another one!");
                 continue;
             } else break;
         }
-        this.positions[(Integer.parseInt(inp1)-1) * 3 + Integer.parseInt(inp2) - 1] = player;
+        this.positions[Integer.parseInt(inp2)-1][Integer.parseInt(inp1)-1] = player;
     }
 
     void start(){
