@@ -10,10 +10,10 @@ Commands:
       
 Uses: 
 
-        (1) starts a new game and either player can be: "user", "easy", "medium" or "hard".
-                user: takes X Y input for moves
-                easy: AI that makes random moves
-                medium: AI that makes random moves bau can also complete a line to win or to avoid losing
-                hard: AI that implements the minimax algorithm, never loses
+(1) starts a new game and either player can be: "user", "easy", "medium" or "hard".
+       user: takes X Y input for moves
+       easy: AI that makes random moves
+       medium: AI that makes random moves bau can also complete a line to win or to avoid losing
+       ard: AI that implements the minimax algorithm, never loses
       
-        (2) ends the program
+(2) ends the program
