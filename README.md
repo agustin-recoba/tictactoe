@@ -16,4 +16,4 @@ Uses:
        medium: AI that makes random moves bau can also complete a line to win or to avoid losing
        ard: AI that implements the minimax algorithm, never loses
       
-(2) ends the program
+(2) ends the program.
